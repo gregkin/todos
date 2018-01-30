@@ -22,7 +22,15 @@
                 height: 100vh;
                 margin: 0;
             }
-
+            .alert-success {
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .center {
+                margin: auto 0;
+                text-align: center;
+                margin-top: 10px;
+            }
             .full-height {
                 height: 100vh;
             }
@@ -46,11 +54,14 @@
             .content {
                 text-align: center;
             }
+            .input-lg {
+                min-width: 600px;
+                text-align: center;
+            }
 
             .title {
                 font-size: 20px;
                 font-weight: bold;
-                text-align: left;
             }
 
             .links > a {
@@ -67,12 +78,30 @@
                 margin-bottom: 30px;
             }
         </style>
+        <script>
+            window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+    });
+}, 4000);
+        </script>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    @yield('content')
+        @if(Session::has('Success'))
+        <div class ="col-lg-4 col-lg-offset-4">    
+            <div class="alert alert-success center" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                        {{ Session::get('Success') }}
+            </div>
+        </div>
+        @endif
+        <div class ="col-lg-12 center">
+            <div class="flex-center position-ref full-height">
+                <div class="content">
+                    <div class="title m-b-md">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
         </div>
